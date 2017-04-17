@@ -1,0 +1,383 @@
+<div class="apidocDiv">
+<style>
+/*csslint
+*/
+.apidocDiv {
+    background: #fff;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.apidocDiv a[href] {
+    color: #33f;
+    font-weight: bold;
+    text-decoration: none;
+}
+.apidocDiv a[href]:hover {
+    text-decoration: underline;
+}
+.apidocCodeCommentSpan {
+    background: #bbf;
+    color: #000;
+    display: block;
+}
+.apidocCodeKeywordSpan {
+    color: #d00;
+    font-weight: bold;
+}
+.apidocCodePre {
+    background: #eef;
+    border: 1px solid;
+    color: #777;
+    padding: 5px;
+    white-space: pre-wrap;
+}
+.apidocFooterDiv {
+    margin-top: 20px;
+    text-align: center;
+}
+.apidocModuleLi {
+    margin-top: 10px;
+}
+.apidocSectionDiv {
+    border-top: 1px solid;
+    margin-top: 20px;
+}
+.apidocSignatureSpan {
+    color: #777;
+    font-weight: bold;
+}
+</style>
+<h1>api documentation for
+    <a
+
+        href="https://github.com/internetErik/gulp-htmlincluder"
+
+    >gulp-htmlincluder (v0.1.0)</a>
+</h1>
+<h4>Gulp plugin for building HTML files into each other.  Made for a workflow involving responsive unit testing.</h4>
+<div class="apidocSectionDiv"><a
+    href="#apidoc.tableOfContents"
+    id="apidoc.tableOfContents"
+><h1>table of contents</h1></a><ol>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.gulp-htmlincluder">module gulp-htmlincluder</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.gulp-htmlincluder.gulp-htmlincluder">
+            function <span class="apidocSignatureSpan"></span>gulp-htmlincluder
+            <span class="apidocSignatureSpan">(insertText)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.gulp-htmlincluder.toString">
+            function <span class="apidocSignatureSpan">gulp-htmlincluder.</span>toString
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">gulp-htmlincluder.</span>htmlincluder</span>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.gulp-htmlincluder.htmlincluder">module gulp-htmlincluder.htmlincluder</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.gulp-htmlincluder.htmlincluder.buildHtml">
+            function <span class="apidocSignatureSpan">gulp-htmlincluder.htmlincluder.</span>buildHtml
+            <span class="apidocSignatureSpan">(callback)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.gulp-htmlincluder.htmlincluder.hashFile">
+            function <span class="apidocSignatureSpan">gulp-htmlincluder.htmlincluder.</span>hashFile
+            <span class="apidocSignatureSpan">(file, insTxt)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.gulp-htmlincluder.htmlincluder.initialize">
+            function <span class="apidocSignatureSpan">gulp-htmlincluder.htmlincluder.</span>initialize
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.gulp-htmlincluder.toString">module gulp-htmlincluder.toString</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.gulp-htmlincluder.toString.toString">
+            function <span class="apidocSignatureSpan">gulp-htmlincluder.</span>toString
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+</ol></div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.gulp-htmlincluder" id="apidoc.module.gulp-htmlincluder">module gulp-htmlincluder</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.gulp-htmlincluder.gulp-htmlincluder" id="apidoc.element.gulp-htmlincluder.gulp-htmlincluder">
+        function <span class="apidocSignatureSpan"></span>gulp-htmlincluder
+        <span class="apidocSignatureSpan">(insertText)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">gulp-htmlincluder = function (insertText) {
+	&#x22;use strict&#x22;;
+	var that;
+
+	includer.initialize();
+
+	function htmlincluder() {
+		includer.buildHtml(function(file) {
+			var f = file.file;
+			f.contents = new Buffer(file.content);
+
+    		that.push(f);
+		});
+	}
+
+	function aggregateFiles(file, enc, callback) {
+
+		that = this; //defined in scope of module
+
+		// Do nothing if no contents
+		if (file.isNull()) {
+			this.push(file);
+			return callback();
+		}
+
+		if (file.isStream()) {
+			this.emit(&#x22;error&#x22;,
+				new gutil.PluginError(&#x22;gulp-htmlincluder&#x22;, &#x22;Stream content is not supported&#x22;));
+			return callback();
+		}
+
+		if (file.isBuffer()) {
+			includer.hashFile(file, insertText);
+		}
+
+		return callback();
+	}
+
+	return through.obj(aggregateFiles, htmlincluder);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.gulp-htmlincluder.toString" id="apidoc.element.gulp-htmlincluder.toString">
+        function <span class="apidocSignatureSpan">gulp-htmlincluder.</span>toString
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">toString = function () {
+    return text;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+
+var isWin = /^win/.test(process.platform);
+
+function File(file) {
+	var f = {
+		name : &#x27;&#x27;,
+		path : file.path,
+		content : file.contents.<span class="apidocCodeKeywordSpan">toString</span>(&#x27;utf8&#x27;),
+		processed : false,
+		file : file
+	};
+
+	f.name = (isWin) ? file.path.split(&#x27;\\&#x27;) : file.path.split(&#x27;/&#x27;);
+	f.name = f.name[f.name.length-1];
+...</pre></li>
+    </ul>
+
+
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.gulp-htmlincluder.htmlincluder" id="apidoc.module.gulp-htmlincluder.htmlincluder">module gulp-htmlincluder.htmlincluder</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.gulp-htmlincluder.htmlincluder.buildHtml" id="apidoc.element.gulp-htmlincluder.htmlincluder.buildHtml">
+        function <span class="apidocSignatureSpan">gulp-htmlincluder.htmlincluder.</span>buildHtml
+        <span class="apidocSignatureSpan">(callback)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function buildHtml(callback) {
+		return pageFiles.map(function(file) {
+			processFile(file);
+
+			if(callback) {
+				callback(file);
+			}
+
+			return file;
+		});
+	}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+module.exports = function (insertText) {
+	&#x22;use strict&#x22;;
+	var that;
+
+	includer.initialize();
+
+	function htmlincluder() {
+		includer.<span class="apidocCodeKeywordSpan">buildHtml</span>(function(file) {
+			var f = file.file;
+			f.contents = new Buffer(file.content);
+
+    		that.push(f);
+		});
+	}
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.gulp-htmlincluder.htmlincluder.hashFile" id="apidoc.element.gulp-htmlincluder.htmlincluder.hashFile">
+        function <span class="apidocSignatureSpan">gulp-htmlincluder.htmlincluder.</span>hashFile
+        <span class="apidocSignatureSpan">(file, insTxt)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function hashFile(file, insTxt) {
+		var f = File(file);
+		
+		//set text value for insert tags, or default
+		insertText = (insTxt) ? &#x27;&#x3c;!--#&#x27; + insTxt : &#x27;&#x3c;!--#insert&#x27;;
+
+		processClip(f);
+		
+		if(f.name[0] === &#x27;_&#x27;)
+			wrapFiles[f.path] = f;
+		else if(f.name[0] === &#x27;-&#x27;)
+			insertFiles[f.path] = f;
+		else
+			pageFiles.push(f);
+	}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+		if (file.isStream()) {
+			this.emit(&#x22;error&#x22;,
+				new gutil.PluginError(&#x22;gulp-htmlincluder&#x22;, &#x22;Stream content is not supported&#x22;));
+			return callback();
+		}
+
+		if (file.isBuffer()) {
+			includer.<span class="apidocCodeKeywordSpan">hashFile</span>(file, insertText);
+		}
+
+		return callback();
+	}
+
+	return through.obj(aggregateFiles, htmlincluder);
+};
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.gulp-htmlincluder.htmlincluder.initialize" id="apidoc.element.gulp-htmlincluder.htmlincluder.initialize">
+        function <span class="apidocSignatureSpan">gulp-htmlincluder.htmlincluder.</span>initialize
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function initialize() {
+		//reset vars in case these had kept their value in closure
+	    wrapFiles = {};
+		insertFiles = {};
+		pageFiles = [];
+	}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+// @insertText = (optional) the test looked for in order to insert files
+// 					(this is so ssi includes can be used instead)
+//
+module.exports = function (insertText) {
+	&#x22;use strict&#x22;;
+	var that;
+
+	includer.<span class="apidocCodeKeywordSpan">initialize</span>();
+
+	function htmlincluder() {
+		includer.buildHtml(function(file) {
+			var f = file.file;
+			f.contents = new Buffer(file.content);
+
+		that.push(f);
+...</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.gulp-htmlincluder.toString" id="apidoc.module.gulp-htmlincluder.toString">module gulp-htmlincluder.toString</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.gulp-htmlincluder.toString.toString" id="apidoc.element.gulp-htmlincluder.toString.toString">
+        function <span class="apidocSignatureSpan">gulp-htmlincluder.</span>toString
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function toString() { [native code] }</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+
+var isWin = /^win/.test(process.platform);
+
+function File(file) {
+	var f = {
+		name : &#x27;&#x27;,
+		path : file.path,
+		content : file.contents.<span class="apidocCodeKeywordSpan">toString</span>(&#x27;utf8&#x27;),
+		processed : false,
+		file : file
+	};
+
+	f.name = (isWin) ? file.path.split(&#x27;\\&#x27;) : file.path.split(&#x27;/&#x27;);
+	f.name = f.name[f.name.length-1];
+...</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocFooterDiv">
+    [ this document was created with
+    <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a>
+    ]
+</div>
+</div>
