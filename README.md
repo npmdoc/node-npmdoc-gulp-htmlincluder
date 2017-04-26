@@ -1,4 +1,7 @@
-# api documentation for  [gulp-htmlincluder (v0.1.0)](https://github.com/internetErik/gulp-htmlincluder)  [![npm package](https://img.shields.io/npm/v/npmdoc-gulp-htmlincluder.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-gulp-htmlincluder) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-gulp-htmlincluder.svg)](https://travis-ci.org/npmdoc/node-npmdoc-gulp-htmlincluder)
+# npmdoc-gulp-htmlincluder
+
+#### basic api documentation for  [gulp-htmlincluder (v0.1.0)](https://github.com/internetErik/gulp-htmlincluder)  [![npm package](https://img.shields.io/npm/v/npmdoc-gulp-htmlincluder.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-gulp-htmlincluder) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-gulp-htmlincluder.svg)](https://travis-ci.org/npmdoc/node-npmdoc-gulp-htmlincluder)
+
 #### Gulp plugin for building HTML files into each other.  Made for a workflow involving responsive unit testing.
 
 [![NPM](https://nodei.co/npm/gulp-htmlincluder.png?downloads=true&downloadRank=true&stars=true)](https://www.npmjs.com/package/gulp-htmlincluder)
@@ -73,7 +76,8 @@
         "coveralls": "istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage",
         "test": "istanbul test _mocha --report html -- test/*.js --reporter spec"
     },
-    "version": "0.1.0"
+    "version": "0.1.0",
+    "bin": {}
 }
 ```
 
